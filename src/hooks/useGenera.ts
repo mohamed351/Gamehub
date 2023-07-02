@@ -2,11 +2,11 @@ import { useEffect, useState } from "react";
 import apiClient from "../services/api-client";
 import { CanceledError } from "axios";
 
-interface GeneraResponse{
+export interface GeneraResponse{
     count:number;
     results:Genera[]
 }
-interface Genera{
+export interface Genera{
     id:number;
     name:string;
     image_background:string;

@@ -2,10 +2,15 @@ import useGame from "../hooks/useGames";
 import {SimpleGrid, Text} from "@chakra-ui/react";
 import GameCard from "./GameCard";
 import LoadingScelecton from "./LoadingSceleton";
+import { Genera } from "../hooks/useGenera";
 
-function GameGrid(){
 
-   const {getError,getGames,isLoading} = useGame();
+interface Props{
+    selectedGenera:Genera | null
+}
+function GameGrid(props:Props){
+
+   const {getError,getGames,isLoading} = useGame(props.selectedGenera?.id);
 
   
     return(

@@ -1,7 +1,11 @@
-import { HStack, Img, List, ListItem,Spinner,Text } from "@chakra-ui/react";
-import useGanara from "../hooks/useGenera";
+import { Button, HStack, Img, List, ListItem,Spinner,Text } from "@chakra-ui/react";
+import useGanara, { Genera } from "../hooks/useGenera";
 
-function GeneraList(){
+
+export interface Props{
+    onSelectGenera:(genera:Genera)=> void 
+}
+function GeneraList({onSelectGenera}:Props){
 
     const {genera,getError,isLoading} = useGanara();
 
@@ -16,7 +20,8 @@ function GeneraList(){
            {genera.map(a=> <ListItem key={a.id}> 
                     <HStack paddingY={2} >
                         <Img src={a.image_background} boxSize="12" borderRadius={10} />
-                        <Text fontSize={20}>{a.name}</Text>
+                        {/* <Text fontSize={20}>{a.name}</Text> */}
+                        <Button variant={"link"} onClick={()=>onSelectGenera(a)}> {a.name} </Button>
                         </HStack>
            </ListItem>)}  
         </List>

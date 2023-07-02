@@ -18,14 +18,16 @@ export interface Platform{
     name:string;
     slug:string
 }
-const useGame =()=>{
+const useGame =(genera?:number)=>{
 
     const [getGames,setGames] = useState<Game[]>([]);
     const [getError,setError] = useState("");
     const [isLoading,setIsLoading] = useState(true);
     useEffect(()=>{
         const controller = new AbortController();
-        apiClient.get<GameResponse>("/games",{signal:controller.signal}).then(a=> {
+        apiClient.get<GameResponse>("/games",{signal:controller.signal, params:{
+            genres:genera
+        }}).then(a=> {
             setGames(a.data.results);
             setIsLoading(false)})
         .catch(err=>{
@@ -33,7 +35,7 @@ const useGame =()=>{
             setError(err)
         });
         return ()=> controller.abort();
-       },[])
+       },[genera])
 
        return {getGames, getError, isLoading};
 }
