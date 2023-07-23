@@ -5,10 +5,14 @@ import GameGrid from './components/GameGrid'
 import GeneraList from './components/GeneraList'
 import { Genera } from './hooks/useGenera'
 import { useState } from 'react'
+import PlatformSelector from './components/PlatformSelector'
+import { Platform } from './hooks/useGames'
+
 
 function App() {
   
 const [selectedGenera,setSelectedGenera] = useState<Genera | null>(null)
+const [selectedPlatform,setSelectedPlatform] = useState<Platform |null>(null);;
 const  onSelectedGenera=(item:Genera)=>{
   setSelectedGenera(item);
 }
@@ -25,12 +29,13 @@ const  onSelectedGenera=(item:Genera)=>{
         <Navbar />
         </GridItem>
         <Show above='lg'>
-        <GridItem area={"aside"} paddingX={"5px"}> 
+        <GridItem area={"aside"} minW={230} paddingX={"5px"}> 
         <GeneraList onSelectGenera={onSelectedGenera}/>
         </GridItem>
         </Show>
         <GridItem area={"main"} >
-          <GameGrid selectedGenera={selectedGenera} />
+         <PlatformSelector selectedPlatform={selectedPlatform} onSelectedPlatform={(platform)=> setSelectedPlatform(platform)}/>
+          <GameGrid selectedPlatform={selectedPlatform} selectedGenera={selectedGenera} />
         </GridItem>
        </Grid>
       </>

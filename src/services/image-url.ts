@@ -1,4 +1,7 @@
-const getCroppedImage=(image:string)=>{
+const getCroppedImage=(image:string)=>{ 
+ if(image == null){
+    return ""
+}
 const target = "/media/"
 let indexOf = image.indexOf(target);
 const partOne = image.substring(0,indexOf);
